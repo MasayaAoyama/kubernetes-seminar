@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-readiness
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.16
+      readinessProbe:
+        exec:
+          command: ["ls", "/usr/share/nginx/html/50x.html"]
+        timeoutSeconds: 1
+        successThreshold: 2
+        failureThreshold: 1
+        initialDelaySeconds: 5
+        periodSeconds: 3

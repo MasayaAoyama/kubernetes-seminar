@@ -1,0 +1,5 @@
+wordpressUsername: sample-user
+wordpressPassword: sample-pass
+wordpressBlogName: "Sample BLOG"
+persistence:
+  size: 3Gi
