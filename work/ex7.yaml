@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: sample-random-cronjob
+spec:
+  schedule: "00 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  suspend: false
+  jobTemplate:
+    spec:
+      completions: 10
+      parallelism: 3
+      backoffLimit: 20
+      template:
+        spec:
+          containers:
+          - name: random-con
+            image: amsy810/random-exit:latest
+          restartPolicy: OnFailure

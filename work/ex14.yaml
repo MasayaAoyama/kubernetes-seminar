@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-2pod-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      example: deploy
+      version: v1
+  template:
+    metadata:
+      labels:
+        example: deploy
+        version: v1
+    spec:
+      nodeSelector:
+        disktype: ssd
+      containers:
+        - name: redis-con
+          image: redis:latest
+        - name: mysql-con
+          image: mysql:latest
