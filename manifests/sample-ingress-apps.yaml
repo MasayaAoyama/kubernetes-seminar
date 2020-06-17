@@ -48,28 +48,3 @@ spec:
   containers:
     - name: nginx-container
       image: amsy810/echo-nginx:latest
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sample-ingress-default
-spec:
-  type: NodePort
-  ports:
-    - name: "http-port"
-      protocol: "TCP"
-      port: 8888
-      targetPort: 80
-  selector:
-    ingress-app: default
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-ingress-default
-  labels:
-    ingress-app: default
-spec:
-  containers:
-    - name: nginx-container
-      image: amsy810/echo-nginx:latest
