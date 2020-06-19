@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sample-random-job
+spec:
+  completions: 10
+  parallelism: 3
+  backoffLimit: 20
+  template:
+    spec:
+      containers:
+      - name: random-con
+        image: amsy810/random-exit:latest
+      restartPolicy: OnFailure

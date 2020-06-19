@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sample-2vol-sts
+spec:
+  serviceName: sample-2vol-sts
+  replicas: 3
+  selector:
+    matchLabels:
+      example: sts
+  template:
+    metadata:
+      labels:
+        example: sts
+    spec:
+      containers:
+        - name: redis-con
+          image: redis:latest
+          volumeMounts:
+          - name: vol1
+            mountPath: /data/vol1
+        - name: nginx-con
+          image: nginx:latest
+          volumeMounts:
+          - name: vol1
+            mountPath: /db/vol1
+          - name: vol2
+            mountPath: /db/vol2
+  volumeClaimTemplates:
+  - metadata:
+      name: vol1
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1G
+  - metadata:
+      name: vol2
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2G

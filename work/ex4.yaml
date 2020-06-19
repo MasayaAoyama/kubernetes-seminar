@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-2pod-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      example: deploy
+      version: v1
+  template:
+    metadata:
+      labels:
+        example: deploy
+        version: v1
+    spec:
+      containers:
+        - name: redis-con
+          image: redis:latest
+        - name: nginx-con
+          image: nginx:latest

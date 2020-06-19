@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: john-secret
+type: Opaque
+data:
+  user: am9obg==
+  password: am9obnBhc3M=
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-john-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: john
+  template:
+    metadata:
+      labels:
+        app: john
+    spec:
+      containers:
+        - name: tools-con
+          image: amsy810/tools:latest
+          env:
+            - name: JOHN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: john-secret
+                  key: user
+            - name: JOHN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: john-secret
+                  key: password

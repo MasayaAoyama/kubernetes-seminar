@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-2pod
+  namespace: default
+spec:
+  containers:
+    - name: redis-con
+      image: redis:latest
+    - name: nginx-con
+      image: nginx:latest

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample-2pod-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      example: rs
+  template:
+    metadata:
+      labels:
+        example: rs
+    spec:
+      containers:
+        - name: redis-con
+          image: redis:latest
+        - name: nginx-con
+          image: nginx:latest
