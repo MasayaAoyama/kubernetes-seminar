@@ -7,5 +7,5 @@ spec:
   containers:
     - name: redis-con
       image: redis:latest
-    - name: mysql-con
-      image: mysql:latest
+    - name: nginx-con
+      image: nginx:latest
